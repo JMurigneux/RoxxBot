@@ -16,7 +16,7 @@ l'idée est de renvoyer un message avec la présentation des stuff classiques ou
     - dofusbook : lien d'un stuff dofusbook (ex : https://d-bk.net/fr/t/9nwN )
 l'idée est d'envoyer le calcul des dégats des sorts de l'invo en question par le stuff en question
 
-* WarpBot stream
+* WarpBot twitch
 donne les infos sur les prochains stream que je vais faire
 '''
 
@@ -27,46 +27,117 @@ chaque element du dict c'est un dict
 quand une classe ne contient pas l'element on dit "j'ai pas de scpécifique mais voici les bases de cet element"
 bi elem écris de la maniere suivante "terre+feu" mais rangés par ordre alphabétique, histoire de pouvoir créer facilement la string 
 '''
+
+#####################
+# VARIABLES
+#####################
+
 ELEMENTS=['terre', 'feu', 'eau', 'air', 'dopou', 'feu+terre', 'eau+terre', 
           'air+terre', 'dopou+terre', 'eau+feu', 'air+feu', 'dopou+feu', 
           'air+eau', 'dopou+eau', 'air+dopou', 'air+eau+terre', 'air+eau+feu', 
           'air+feu+terre', 'eau+feu+terre', 'air+dopou+eau', 'air+dopou+terre', 
           'dopou+feu+terre', 'air+dopou+feu', 'dopou+eau+feu', 'dopou+eau+terre', 
-          'multi','',False]
+          'multi']
 CLASSES=['xelor', 'enutrof', 'eniripsa', 'osamodas', 'zobal', 'sadida',
        'steamer', 'sacrieur', 'iop', 'pandawa', 'ecaflip', 'cra', 'feca',
-       'sram', 'roublard','',False]
+       'sram', 'roublard','vide']
 #dans elements et classes je rajoute vide et faux pour prendre en compte les cas où on ne remplis pas l'argument de l'un des deux, ça peut être normal
 
-stuffs=dict()
+STUFFS=dict()
+STUFFS["terre"]={'12/6': ["<https://d-bk.net/fr/t/8vYb>"], '11/6': ["<https://d-bk.net/fr/t/9WxC>"], 'cc': [], 'no_cc': []}
+STUFFS["feu"]={'12/6': ["<https://d-bk.net/fr/t/A8Zv>"], '11/6': ["<https://d-bk.net/fr/t/8yAu>"], 'cc': [], 'no_cc': []}
+STUFFS["eau"]={'12/6': ["<https://d-bk.net/fr/t/B7er>"], '11/6': ["<https://d-bk.net/fr/t/B9MR>"], 'cc': [], 'no_cc': []}
+STUFFS["air"]={'12/6': ["<https://d-bk.net/fr/t/5qJF>"], '11/6': ["<https://d-bk.net/fr/t/9RJp>"], 'cc': [], 'no_cc': []}
+# STUFFS["dopou"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []} ### Dopou is always with another element
+STUFFS["feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/7ESW>"], 'no_cc': ["<https://d-bk.net/fr/t/AwSG>"]}
+STUFFS["eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/Azb9>"], 'cc': [], 'no_cc': []}
+# STUFFS["air+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
+# STUFFS["dopou+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
+STUFFS["eau+feu"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/931X>"], 'cc': [], 'no_cc': []}
+STUFFS["air+feu"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/7OhS>"], 'no_cc': []}
+# STUFFS["dopou+feu"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
+STUFFS["air+eau"]={'12/6': ["<https://d-bk.net/fr/t/8Ql4>"], '11/6': ["<https://d-bk.net/fr/t/BMXD>"], 'cc': [], 'no_cc': []}
+STUFFS["dopou+eau"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/AzPu>"], 'cc': [], 'no_cc': []}
+STUFFS["air+dopou"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BK5m>"], 'cc': [], 'no_cc': []}
+STUFFS["air+eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/2OhT>"], 'cc': [], 'no_cc': []}
+STUFFS["air+eau+feu"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/2OhM>"], 'no_cc': ["<https://d-bk.net/fr/t/BQYM>"]}
+STUFFS["air+feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/4qgX>"], 'no_cc': ["<https://d-bk.net/fr/t/AP7x>"]}
+STUFFS["eau+feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/47TD>"], 'no_cc': []}
+STUFFS["air+dopou+eau"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/A9Iy>"], 'cc': [], 'no_cc': []}
+# STUFFS["air+dopou+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
+# STUFFS["dopou+feu+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
+# STUFFS["air+dopou+feu"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
+STUFFS["dopou+eau+feu"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BQQd>"], 'cc': [], 'no_cc': []}
+STUFFS["dopou+eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BQQl>"], 'cc': [], 'no_cc': []}
+STUFFS["multi"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/2Ol7>"], 'no_cc': []}
+STUFFS["osamodas"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
+                    ,'eau+feu':{'cher' : ["<https://d-bk.net/fr/t/9UXA>"],'plus abordable' : ["<https://d-bk.net/fr/t/AQSn>"]}
+                    ,'air' :{'11/6' :["<https://d-bk.net/fr/t/9Y06>"]}
+                    ,'eau' :{'12/6' :["<https://d-bk.net/fr/t/BCMB>"]}                    
+                    }
+STUFFS["sadida"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
+                    ,'eau+feu':{'cher' : ["<https://d-bk.net/fr/t/9UXA>"],'plus abordable' : ["<https://d-bk.net/fr/t/AQSn>"]}
+                    ,'terre' :{'11/6' :["<https://d-bk.net/fr/t/BQpf>"]}                
+                    }
 
-stuffs["terre"]={'12/6': ["<https://d-bk.net/fr/t/8vYb>"], '11/6': ["<https://d-bk.net/fr/t/9WxC>"], 'cc': [], 'no_cc': []}
-stuffs["feu"]={'12/6': ["<https://d-bk.net/fr/t/A8Zv>"], '11/6': ["<https://d-bk.net/fr/t/8yAu>"], 'cc': [], 'no_cc': []}
-stuffs["eau"]={'12/6': ["<https://d-bk.net/fr/t/B7er>"], '11/6': ["<https://d-bk.net/fr/t/B9MR>"], 'cc': [], 'no_cc': []}
-stuffs["air"]={'12/6': ["<https://d-bk.net/fr/t/5qJF>"], '11/6': ["<https://d-bk.net/fr/t/9RJp>"], 'cc': [], 'no_cc': []}
-# stuffs["dopou"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []} ### Dopou is always with another element
-stuffs["feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/7ESW>"], 'no_cc': ["<https://d-bk.net/fr/t/AwSG>"]}
-stuffs["eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/Azb9>"], 'cc': [], 'no_cc': []}
-# stuffs["air+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
-# stuffs["dopou+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
-stuffs["eau+feu"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/931X>"], 'cc': [], 'no_cc': []}
-stuffs["air+feu"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/7OhS>"], 'no_cc': []}
-# stuffs["dopou+feu"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
-stuffs["air+eau"]={'12/6': ["<https://d-bk.net/fr/t/8Ql4>"], '11/6': ["<https://d-bk.net/fr/t/BMXD>"], 'cc': [], 'no_cc': []}
-stuffs["dopou+eau"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/AzPu>"], 'cc': [], 'no_cc': []}
-stuffs["air+dopou"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BK5m>"], 'cc': [], 'no_cc': []}
-stuffs["air+eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/2OhT>"], 'cc': [], 'no_cc': []}
-stuffs["air+eau+feu"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/2OhM>"], 'no_cc': ["<https://d-bk.net/fr/t/BQYM>"]}
-stuffs["air+feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/4qgX>"], 'no_cc': ["<https://d-bk.net/fr/t/AP7x>"]}
-stuffs["eau+feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/47TD>"], 'no_cc': []}
-stuffs["air+dopou+eau"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/A9Iy>"], 'cc': [], 'no_cc': []}
-# stuffs["air+dopou+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
-# stuffs["dopou+feu+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
-# stuffs["air+dopou+feu"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
-stuffs["dopou+eau+feu"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BQQd>"], 'cc': [], 'no_cc': []}
-stuffs["dopou+eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BQQl>"], 'cc': [], 'no_cc': []}
-stuffs["multi"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/2Ol7>"], 'no_cc': []}
-stuffs["osamodas"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}, 'eau+feu':{'cher' : ["<https://d-bk.net/fr/t/9UXA>"],'plus abordable' : ["<https://d-bk.net/fr/t/AQSn>"]}}
+
+
+#####################
+# MAIN RESPONSE
+#####################
+
+# def get_response(user_input: str, user_name : str, channel : str):
+#     lowered: str = user_input.lower()
+
+#     if lowered == '':
+#         return 'Ok tu arrive à envoyer des messages vides?? Sorcier!'
+#     elif lowered =='salut warpbot' :
+#         return f'Salut {user_name}!'    
+#     elif lowered =='!warpbot lance un dé' or lowered =='!wb lance un dé':
+#         return f'Tu as eu: {randint(1, 6)}'
+#     elif command :=re.match(r"(?P<botname>!\w+)\s?(?P<function>\w*)\s?(?P<arg1>[+\w]*)\s?(?P<arg2>[a-z0-9\/\.\-:]*)", lowered):
+#         print(command.group('botname'),command.group('function'),command.group('arg1'),command.group('arg2'))
+#         if command.group('botname')!= '!warpbot' and command.group('botname')!= '!wb':
+#             return -1
+        
+#         if command.group('function')=="stuff": #stuff
+#             element = command.group('arg1')
+#             classe = command.group('arg2')
+#             # print(element,classe)
+#             return stuff_response(element=element,classe=classe)
+        
+#         # elif command.group('function')=="calcul": #calcul
+#         #     return calcul_response(command)
+        
+#         elif command.group('function')=="twitch": #twitch
+#             resp= f"""
+# Je stream la majorité des tournois pvp sur dofus touch, sauf quand je participe bien sur !
+# Au programme :
+# - 27/28/29 septembre : stream tournois du serveur Oshimo
+# - 4/5/6 octobre : je participe au tournois sur herdegrize
+# """
+#             return resp
+        
+#         elif command.group('function')=="help": #help
+#             return help_response(command)
+        
+#         else: #mauvaise fonction
+#             resp= f"""
+# Argument `{command.group('function')} ` inconnu, les fonctions utilisables sont:
+# - help   : pour recevoir de l'aide sur l'utilisation du bot 
+# - stuff  : pour recevoir des recommandations de stuff
+# - twitch : pour avoir des infos sur les prochains stream de warp
+# Tu peux utiliser `!WarpBot help xxx` pour avoir des informations sur comment formuler les requetes avec chacune des 2 fonctions stuff/twitch.
+# """
+# # - calcul : pour avoir des estimations de dommage d'invocations ou dopou
+#             return resp
+#     return -1
+
+
+
+#####################
+# FONCTIONS UTILES
+#####################
 
 #prend une liste d'éléments et la met sous la forme elt1+elt2+elt3...
 def from_elts_to_multi(elt_list):
@@ -78,129 +149,146 @@ def rearrange_elt(elts):
     elt_spl=elts.split("+")
     return from_elts_to_multi(elt_spl)
 
-def get_response(user_input: str, user_name : str, channel : str):
-    lowered: str = user_input.lower()
-
-    if lowered == '':
-        return 'Ok tu arrive à envoyer des messages vides?? Sorcier!'
-    elif lowered =='salut warpbot' :
-        return f'Salut {user_name}!'
-    elif lowered =='!warpbot lance un dé' or lowered =='!wb lance un dé':
-        return f'Tu as eu: {randint(1, 6)}'
-    elif command :=re.match(r"(?P<botname>!\w+) (?P<function>\w+)\s?(?P<arg1>[+\w]*)\s?(?P<arg2>[a-z0-9\/\.\-:]*)", lowered):
-        print(command.group('botname'),command.group('function'),command.group('arg1'),command.group('arg2'))
-        if command.group('botname')!= '!warpbot' and command.group('botname')!= '!wb':
-            return -1
-        
-        if command.group('function')=="stuff":
-            element = command.group('arg1')
-            classe = command.group('arg2')
-            # print(element,classe)
-            return stuff_response(element=element,classe=classe)
-        
-        elif command.group('function')=="calcul":
-            return "ça fait 13 frelon"
-        else:
-            resp= f"""
-Argument **{command.group('function')}** inconnu, les fonctions utilisables sont:
-- stuff : pour recevoir des recommandations de stuff
-- calcul : pour avoir des estimations de dommage d'invocations ou dopou
-- stream : pour avoir des infos sur les prochains stream de warp
-
+def help_response(command):
+    if command=="stuff": #/wbhelp stuff
+        resp= f"""
+Pour recevoir des recommandations de stuff il faut utiliser la commande `/stuff élément classe`
+- **élément** : terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+', ex: élément+élément+... avec 3 éléments maximum
+Exemple de requete valide : `/stuff air+eau`
+- OPTIONNEL **classe** : une des classes du jeu écrite avec le nom complet, pour recevoir des stuff spécifiques à la classe donnée s'il y en a dans la bibliothèque.
+Ce qui nous fait une requete de la forme : `/stuff eau+feu osamodas`
 """
-            return resp
-    return -1
+#     elif command.group('arg1')=="calcul": #/wbhelp calcul
+#         resp= f"""
+# TODO : pas de fonction donc pas d'explication pour le moment
+# """
+    elif command=="twitch": #/wbhelp twitch
+        resp= f"""
+`/twitch` Répond avec les infos sur les prochains stream de prévus (si il n'y a pas de tournois de prévus probablement qu'il n'y aura pas de stream).
+"""
+    else: #/wbhelp
+        resp= f"""
+Comment utiliser WarpBot? 
+
+Il y a deux commandes :
+- Stuff  : pour recevoir des recommandations de stuff. `/wbhelp stuff` pour plus de détails.
+- Twitch : pour avoir des infos sur les prochains stream de warp. Pas d'argument à rajouter, `/twitch` vous renverra les informations nécessaires.
+"""
+# - Calcul : pour avoir des estimations de dommage d'invocations ou dopou . `/wbhelp calcul` pour plus de détails.
+# - calcul : pour la formulation des calculs de dommage d'invocations ou dopou
+    return resp
+        
 
 
-def stuff_response(element=False,classe=False):
+def stuff_response(element,classe):
     elt=rearrange_elt(element)
 
     # vérification que les arguments soient corrects
     if not classe in CLASSES and not elt in ELEMENTS: #classe+element non reconnus
         resp=f"""
-Réponse expliquand le fonctionnement des commandes classe et elt.    
-Arguments : element ={elt}, classe={classe}
+Je ne reconnais pas les arguments **{elt}** et **{classe}** fournis.
+Pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `/wbhelp stuff`.
+Elements valides: terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+'.
+Pour les classes il faut écrire le nom en entier.
+Exemple de requete valide : `/stuff eau+feu osamodas`.
 """
         return resp
     elif not elt in ELEMENTS: #élément non reconnu
         resp=f"""
-Je ne reconnais pas l'élément **{elt}** désolé, la liste des éléments dans ma bibliothèque est:
-- terre
-- feu
-- eau
-- air
-- dopou
-- multi
-ou toute combinaison de ces éléments (excepté multi) séparés d'un '+', ex: element1+element2+... avec 3 éléments maximum
-Arguments : element ={elt}, classe={classe}
+Je ne reconnais pas l'élément **{elt}** désolé, pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `/wbhelp stuff`.
+Elements valides: terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+'.
+Exemple de requete valide : `/stuff air+eau`.
 """
         return resp
     elif not classe in CLASSES: #classe non reconnue
         resp=f"""
-Réponse expliquand le fonctionnement des commandes classe.        
-Arguments : element ={elt}, classe={classe}
+Je ne reconnais pas la classe **{classe}** désolé, pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `/wbhelp stuff`.
+Il faut écrire le nom de classe en entier.
+Exemple de requete valide : `/stuff eau+feu osamodas`.
 """
         return resp
     
-    if not classe or classe=='': # pas de classe spécifiée
+    if classe=='vide': # pas de classe spécifiée
         if not '+' in elt: #mono élément
             if elt in ["terre","feu","eau"]:
                 resp= f"""
 Pour l'élément {elt} je te recommande :
-- 12/6 : {stuffs[elt]["12/6"][0]}
-- 11/6 : {stuffs[elt]["11/6"][0]} 
+- 12/6 : {STUFFS[elt]["12/6"][0]}
+- 11/6 : {STUFFS[elt]["11/6"][0]} 
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
             elif elt=="air":
                 resp= f"""
 Pour l'élément {elt} je te recommande :
-- 11/6 : {stuffs[elt]["11/6"][0]} (vraiment le mieux)
-- 12/6 : {stuffs[elt]["12/6"][0]}
+- 11/6 : {STUFFS[elt]["11/6"][0]} (vraiment le mieux)
+- 12/6 : {STUFFS[elt]["12/6"][0]}
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
             elif elt=="dopou":
                 resp= f"""
 Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédominants il y a toujours un élément avec, mes recommandations sont donc les suivantes :
-- eau air dopou : {stuffs["air+dopou+eau"]["11/6"][0]}
-- eau dopou : {stuffs["dopou+eau"]["11/6"][0]}
-- air dopou : {stuffs["air+dopou"]["11/6"][0]}
-- terre eau dopou : {stuffs["dopou+eau+terre"]["11/6"][0]} (fonctionne pour terre dopou)
-- feu eau dopou : {stuffs["dopou+eau+feu"]["11/6"][0]} (fonctionne pour feu dopou)
+- eau air dopou : {STUFFS["air+dopou+eau"]["11/6"][0]}
+- eau dopou : {STUFFS["dopou+eau"]["11/6"][0]}
+- air dopou : {STUFFS["air+dopou"]["11/6"][0]}
+- terre eau dopou : {STUFFS["dopou+eau+terre"]["11/6"][0]} (fonctionne pour terre dopou)
+- feu eau dopou : {STUFFS["dopou+eau+feu"]["11/6"][0]} (fonctionne pour feu dopou)
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
             elif elt=='multi':
                 resp= f"""
 Pour jouer {elt} je te recommande :
-- docri : {stuffs[elt]["cc"][0]}
+- docri : {STUFFS[elt]["cc"][0]}
 N'hésite pas à tag Warp pour plus de détails sur ce stuff."""
             else : #élément non reconnu
                 resp=f"""
-Tu n'as pas fournis d'élément, la requête doit avoir le format : !WarpBot stuff *element* *classe*."""
+Tu n'as pas fournis d'élément, la requête doit avoir le format : `/stuff élément classe`."""
         
         else: #mutli element
-            if elt in stuffs.keys():
+            if elt in STUFFS.keys():
                 resp= f"""
 Pour l'élément {elt} je te recommande :\n"""
-                for mode in stuffs[elt].keys():
-                    if len(stuffs[elt][mode])>0:
-                        resp+=f"- {mode} : {stuffs[elt][mode][0]}\n"
+                for mode in STUFFS[elt].keys():
+                    if len(STUFFS[elt][mode])>0:
+                        resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
                 resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
             else: #élément non présent dans la biblio
                 resp=f"""
 Je n'ai pas de stuff dans ma bibliothèque qui corresponde au combo {elt}, tu peux tag Warp pour savoir pourquoi et peut-être qu'il aura quelque chose à te proposer."""
+                
+
     else: #avec une classe précisée
-        if classe in stuffs.keys():
-            if elt in stuffs[classe].keys():
+        if classe in STUFFS.keys():
+            if elt in STUFFS[classe].keys():
                 resp=f"""
 Pour l'élément {elt} de la classe {classe} je te recommande :\n"""
-                for mode in stuffs[classe][elt].keys():
-                    if len(stuffs[classe][elt][mode])>0:
-                        resp+=f"- {mode} : {stuffs[classe][elt][mode][0]}\n"
+                for mode in STUFFS[classe][elt].keys():
+                    if len(STUFFS[classe][elt][mode])>0:
+                        resp+=f"- {mode} : {STUFFS[classe][elt][mode][0]}\n"
                 resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
         else:
             resp=f"""
 Je n'ai pas de stuff {elt} spécifiques pour la classe {classe}, tu trouveras probablement ton bonheur dans les stuffs classiques de l'élément:\n"""
-            for mode in stuffs[elt].keys():
-                if len(stuffs[elt][mode])>0:
-                    resp+=f"- {mode} : {stuffs[elt][mode][0]}\n"
+            for mode in STUFFS[elt].keys():
+                if len(STUFFS[elt][mode])>0:
+                    resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
             resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
     return resp
 
 
+def calcul_response(command):
+    if command.group('arg1')=="dopou": #/calcul dopou
+
+        resp= f"""
+Pour recevoir des recommandations de stuff il faut utiliser la fonction `/stuff élément classe`
+- **élément** : terre/feu/eau/air/dopou/multi ou toute combinaison de ces éléments (excepté multi) séparés d'un '+', ex: élément+élément+... avec 3 éléments maximum
+Exemple de requete valide : `/stuff air+eau`
+- **classe** : une des classes du jeu écrite avec le nom complet, pour recevoir des stuff spécifiques à la classe donnée s'il y en a dans la bibliothèque.
+Ce qui nous fait une requete de la forme : `/stuff eau+feu osamodas`
+"""
+    
+    elif command.group('arg1')=='': #/calcul 
+        resp= f"""
+
+"""
+    else: #/calcul dqzdzqd , arg1 erroné
+        resp= f"""
+
+"""
+    return resp
