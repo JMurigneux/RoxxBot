@@ -45,7 +45,7 @@ async def twitch(interaction: Interaction):
     resp= f"""
 Je stream la majorité des tournois pvp sur dofus touch, sauf quand je participe bien sur !
 Au programme :
-- 4/5/6 octobre : je participe au tournois sur herdegrize, je vais probablement stream la suite du tournois si je me fais éliminer avant la fin.
+- 8/9/10 Novembre : Tournois Terra Cogita
 """
     await interaction.response.send_message(resp)
 
