@@ -30,13 +30,13 @@ async def on_ready() -> None:
 # Stuff command
 @bot.tree.command(name="stuff", description="Répond avec mes recommandations de stuff.")
 async def stuff(interaction: Interaction, element: str, classe: str="vide"):
-    resp=stuff_response(element.lower(),classe.lower())
+    resp=stuff_response(element.strip().lower(),classe.strip().lower())
     await interaction.response.send_message(resp)
 
 # wbhelp command
 @bot.tree.command(name="wbhelp", description="Besoin d'aide sur l'utilisation du bot?")
 async def wbhelp(interaction: Interaction, commande: str ='vide'):
-    resp=help_response(commande.lower())
+    resp=help_response(commande.strip().lower())
     await interaction.response.send_message(resp)
 
 # twitch command

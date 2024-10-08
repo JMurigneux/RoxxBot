@@ -145,8 +145,13 @@ def from_elts_to_multi(elt_list):
     return '+'.join(sorted_list)
 
 #prends les éléments sous le format elt1+elt2+elt3... et les remet dans le bon ordre
-def rearrange_elt(elts):
-    elt_spl=elts.split("+")
+def lecture_elt(elts):
+    elt_spl=[e.strip() for e in elts.replace("/","+").split(r"+")]
+    # print(elts,elt_spl)
+    if len(elt_spl)==1:
+        elt_spl=[e.strip() for e in elts.split(r" ")]
+        # print(elts,elt_spl)
+
     return from_elts_to_multi(elt_spl)
 
 def help_response(command):
@@ -181,7 +186,7 @@ Il y a deux commandes :
 
 
 def stuff_response(element,classe):
-    elt=rearrange_elt(element)
+    elt=lecture_elt(element)
 
     # vérification que les arguments soient corrects
     if not classe in CLASSES and not elt in ELEMENTS: #classe+element non reconnus
@@ -216,12 +221,14 @@ Pour l'élément {elt} je te recommande :
 - 12/6 : {STUFFS[elt]["12/6"][0]}
 - 11/6 : {STUFFS[elt]["11/6"][0]} 
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
+                return resp
             elif elt=="air":
                 resp= f"""
 Pour l'élément {elt} je te recommande :
 - 11/6 : {STUFFS[elt]["11/6"][0]} (vraiment le mieux)
 - 12/6 : {STUFFS[elt]["12/6"][0]}
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
+                return resp
             elif elt=="dopou":
                 resp= f"""
 Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédominants il y a toujours un élément avec, mes recommandations sont donc les suivantes :
@@ -231,14 +238,17 @@ Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédomina
 - terre eau dopou : {STUFFS["dopou+eau+terre"]["11/6"][0]} (fonctionne pour terre dopou)
 - feu eau dopou : {STUFFS["dopou+eau+feu"]["11/6"][0]} (fonctionne pour feu dopou)
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
+                return resp
             elif elt=='multi':
                 resp= f"""
 Pour jouer {elt} je te recommande :
 - docri : {STUFFS[elt]["cc"][0]}
 N'hésite pas à tag Warp pour plus de détails sur ce stuff."""
+                return resp
             else : #élément non reconnu
                 resp=f"""
 Tu n'as pas fournis d'élément, la requête doit avoir le format : `/stuff élément classe`."""
+                return resp
         
         else: #mutli element
             if elt in STUFFS.keys():
@@ -248,12 +258,17 @@ Pour l'élément {elt} je te recommande :\n"""
                     if len(STUFFS[elt][mode])>0:
                         resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
                 resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
+                return resp
+
             else: #élément non présent dans la biblio
                 resp=f"""
 Je n'ai pas de stuff dans ma bibliothèque qui corresponde au combo {elt}, tu peux tag Warp pour savoir pourquoi et peut-être qu'il aura quelque chose à te proposer."""
+                return resp
+
                 
 
     else: #avec une classe précisée
+        resp='pas trouvé'
         if classe in STUFFS.keys():
             if elt in STUFFS[classe].keys():
                 resp=f"""
@@ -262,15 +277,18 @@ Pour l'élément {elt} de la classe {classe} je te recommande :\n"""
                     if len(STUFFS[classe][elt][mode])>0:
                         resp+=f"- {mode} : {STUFFS[classe][elt][mode][0]}\n"
                 resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
-        else:
+                
+        if resp=='pas trouvé':
             resp=f"""
 Je n'ai pas de stuff {elt} spécifiques pour la classe {classe}, tu trouveras probablement ton bonheur dans les stuffs classiques de l'élément:\n"""
             for mode in STUFFS[elt].keys():
                 if len(STUFFS[elt][mode])>0:
                     resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
             resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
-    return resp
+        return resp
 
+    resp="Vraisemblablement il y a une erreur dans le code : tu ne devrais pas arriver ici, tag Warp pour qu'il répare le bug stp <3"
+    return resp
 
 def calcul_response(command):
     if command.group('arg1')=="dopou": #/calcul dopou
