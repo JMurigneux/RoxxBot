@@ -46,6 +46,10 @@ async def twitch(interaction: Interaction):
 Je stream la majorité des tournois pvp sur dofus touch, sauf quand je participe bien sur !
 Au programme :
 - 8/9/10 Novembre : Tournois Terra Cogita
+- 19-24 Novembre : Tournois Oshimo
+- 29 Novembre - 1 Décembre : Tournois Tiliwan 1
+- 6/7/8 Décembre : Tournois Herdegrize
+- 13/14/15 Décembre : Tournois Tiliwan 2
 """
     await interaction.response.send_message(resp)
 

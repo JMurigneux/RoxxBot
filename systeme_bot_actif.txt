@@ -26,19 +26,19 @@ Revenir à la session en vous reconnectant plus tard :
 Pour un fonctionnement encore plus automatisé, vous pouvez configurer le bot pour qu’il tourne comme un service systemd, ce qui le relancera automatiquement si le système redémarre ou en cas d’arrêt inattendu.
 Créer un fichier de service pour le bot :
 
-	sudo nano /etc/systemd/system/discord_bot.service
+	sudo nano /etc/systemd/system/roxxbot_session.service
 
 Ajouter la configuration suivante, en remplaçant /chemin/vers/main.py par le chemin vers votre fichier Python :
 
 [Unit]
-Description=Discord Bot
+Description=RoxxBot session
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /chemin/vers/main.py
-WorkingDirectory=/chemin/vers
+ExecStart=/usr/bin/python3 /home/warp/Documents/RoxxBot/main.py
+WorkingDirectory=/home/warp/Documents/RoxxBot
 Restart=always
-User=your-username
+User=warp
 
 [Install]
 WantedBy=multi-user.target
@@ -46,14 +46,14 @@ WantedBy=multi-user.target
 Enregistrer et démarrer le service :
 
 	sudo systemctl daemon-reload
-	sudo systemctl start discord_bot.service
-	sudo systemctl enable discord_bot.service
+	sudo systemctl start roxxbot_session.service
+	sudo systemctl enable roxxbot_session.service
 
 Gérer le service (démarrer, arrêter, ou redémarrer) depuis n’importe quel ordinateur connecté en SSH :
 
-    	sudo systemctl stop discord_bot.service
-    	sudo systemctl start discord_bot.service
-    	sudo systemctl restart discord_bot.service
+    	sudo systemctl stop roxxbot_session.service
+    	sudo systemctl start roxxbot_session.service
+    	sudo systemctl restart roxxbot_session.service
 
 3. Utiliser Git pour gérer les modifications de code
 
