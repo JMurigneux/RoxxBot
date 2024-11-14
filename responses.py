@@ -154,14 +154,22 @@ def lecture_elt(elts):
 
     return from_elts_to_multi(elt_spl)
 
-def help_response(command):
+def help_response(command,plateforme="discord"):
+
+    if plateforme=="discord":
+        prefixe='/'
+    elif plateforme=="twitch":
+        prefixe="!"
+    else :
+        prefixe='/'
+
     if command=="stuff": #/wbhelp stuff
         resp= f"""
-Pour recevoir des recommandations de stuff il faut utiliser la commande `/stuff élément classe`
+Pour recevoir des recommandations de stuff il faut utiliser la commande `{prefixe}stuff élément classe`
 - **élément** : terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+', ex: élément+élément+... avec 3 éléments maximum
-Exemple de requete valide : `/stuff air+eau`
+Exemple de requete valide : `{prefixe}stuff air+eau`
 - OPTIONNEL **classe** : une des classes du jeu écrite avec le nom complet, pour recevoir des stuff spécifiques à la classe donnée s'il y en a dans la bibliothèque.
-Ce qui nous fait une requete de la forme : `/stuff eau+feu osamodas`
+Ce qui nous fait une requete de la forme : `{prefixe}stuff eau+feu osamodas`
 """
 #     elif command.group('arg1')=="calcul": #/wbhelp calcul
 #         resp= f"""
@@ -169,15 +177,15 @@ Ce qui nous fait une requete de la forme : `/stuff eau+feu osamodas`
 # """
     elif command=="twitch": #/wbhelp twitch
         resp= f"""
-`/twitch` Répond avec les infos sur les prochains stream de prévus (si il n'y a pas de tournois de prévus probablement qu'il n'y aura pas de stream).
+`{prefixe}twitch` Répond avec les infos sur les prochains stream de prévus (si il n'y a pas de tournois de prévus probablement qu'il n'y aura pas de stream).
 """
     else: #/wbhelp
         resp= f"""
 Comment utiliser WarpBot? 
 
 Il y a deux commandes :
-- Stuff  : pour recevoir des recommandations de stuff. `/wbhelp stuff` pour plus de détails.
-- Twitch : pour avoir des infos sur les prochains stream de warp. Pas d'argument à rajouter, `/twitch` vous renverra les informations nécessaires.
+- Stuff  : pour recevoir des recommandations de stuff. `{prefixe}wbhelp stuff` pour plus de détails.
+- Twitch : pour avoir des infos sur les prochains stream de warp. Pas d'argument à rajouter, `{prefixe}twitch` vous renverra les informations nécessaires.
 """
 # - Calcul : pour avoir des estimations de dommage d'invocations ou dopou . `/wbhelp calcul` pour plus de détails.
 # - calcul : pour la formulation des calculs de dommage d'invocations ou dopou
@@ -185,31 +193,40 @@ Il y a deux commandes :
         
 
 
-def stuff_response(element,classe):
+def stuff_response(element,classe,plateforme="discord"):
+
     elt=lecture_elt(element)
+
+    if plateforme=="discord":
+        prefixe='/'
+    elif plateforme=="twitch":
+        prefixe="!"
+    else :
+        prefixe='/'
+        
 
     # vérification que les arguments soient corrects
     if not classe in CLASSES and not elt in ELEMENTS: #classe+element non reconnus
         resp=f"""
 Je ne reconnais pas les arguments **{elt}** et **{classe}** fournis.
-Pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `/wbhelp stuff`.
+Pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `{prefixe}wbhelp stuff`.
 Elements valides: terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+'.
 Pour les classes il faut écrire le nom en entier.
-Exemple de requete valide : `/stuff eau+feu osamodas`.
+Exemple de requete valide : `{prefixe}stuff eau+feu osamodas`.
 """
         return resp
     elif not elt in ELEMENTS: #élément non reconnu
         resp=f"""
-Je ne reconnais pas l'élément **{elt}** désolé, pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `/wbhelp stuff`.
+Je ne reconnais pas l'élément **{elt}** désolé, pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `{prefixe}wbhelp stuff`.
 Elements valides: terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+'.
-Exemple de requete valide : `/stuff air+eau`.
+Exemple de requete valide : `{prefixe}stuff air+eau`.
 """
         return resp
     elif not classe in CLASSES: #classe non reconnue
         resp=f"""
-Je ne reconnais pas la classe **{classe}** désolé, pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `/wbhelp stuff`.
+Je ne reconnais pas la classe **{classe}** désolé, pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `{prefixe}wbhelp stuff`.
 Il faut écrire le nom de classe en entier.
-Exemple de requete valide : `/stuff eau+feu osamodas`.
+Exemple de requete valide : `{prefixe}stuff eau+feu osamodas`.
 """
         return resp
     
@@ -217,21 +234,21 @@ Exemple de requete valide : `/stuff eau+feu osamodas`.
         if not '+' in elt: #mono élément
             if elt in ["terre","feu","eau"]:
                 resp= f"""
-Pour l'élément {elt} je te recommande :
+Pour l'élément {elt} je te recommande : 
 - 12/6 : {STUFFS[elt]["12/6"][0]}
 - 11/6 : {STUFFS[elt]["11/6"][0]} 
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
                 return resp
             elif elt=="air":
                 resp= f"""
-Pour l'élément {elt} je te recommande :
+Pour l'élément {elt} je te recommande : 
 - 11/6 : {STUFFS[elt]["11/6"][0]} (vraiment le mieux)
 - 12/6 : {STUFFS[elt]["12/6"][0]}
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
                 return resp
             elif elt=="dopou":
                 resp= f"""
-Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédominants il y a toujours un élément avec, mes recommandations sont donc les suivantes :
+Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédominants il y a toujours un élément avec, mes recommandations sont donc les suivantes : 
 - eau air dopou : {STUFFS["air+dopou+eau"]["11/6"][0]}
 - eau dopou : {STUFFS["dopou+eau"]["11/6"][0]}
 - air dopou : {STUFFS["air+dopou"]["11/6"][0]}
@@ -247,7 +264,7 @@ N'hésite pas à tag Warp pour plus de détails sur ce stuff."""
                 return resp
             else : #élément non reconnu
                 resp=f"""
-Tu n'as pas fournis d'élément, la requête doit avoir le format : `/stuff élément classe`."""
+Tu n'as pas fournis d'élément, la requête doit avoir le format : `{prefixe}stuff élément classe`."""
                 return resp
         
         else: #mutli element
@@ -266,7 +283,6 @@ Je n'ai pas de stuff dans ma bibliothèque qui corresponde au combo {elt}, tu pe
                 return resp
 
                 
-
     else: #avec une classe précisée
         resp='pas trouvé'
         if classe in STUFFS.keys():
@@ -290,15 +306,22 @@ Je n'ai pas de stuff {elt} spécifiques pour la classe {classe}, tu trouveras pr
     resp="Vraisemblablement il y a une erreur dans le code : tu ne devrais pas arriver ici, tag Warp pour qu'il répare le bug stp <3"
     return resp
 
-def calcul_response(command):
+def calcul_response(command,plateforme="discord"):
+
+    if plateforme=="discord":
+        prefixe='/'
+    elif plateforme=="twitch":
+        prefixe="!"
+    else :
+        prefixe='/'
     if command.group('arg1')=="dopou": #/calcul dopou
 
         resp= f"""
-Pour recevoir des recommandations de stuff il faut utiliser la fonction `/stuff élément classe`
+Pour recevoir des recommandations de stuff il faut utiliser la fonction `{prefixe}stuff élément classe`
 - **élément** : terre/feu/eau/air/dopou/multi ou toute combinaison de ces éléments (excepté multi) séparés d'un '+', ex: élément+élément+... avec 3 éléments maximum
 Exemple de requete valide : `/stuff air+eau`
 - **classe** : une des classes du jeu écrite avec le nom complet, pour recevoir des stuff spécifiques à la classe donnée s'il y en a dans la bibliothèque.
-Ce qui nous fait une requete de la forme : `/stuff eau+feu osamodas`
+Ce qui nous fait une requete de la forme : `{prefixe}stuff eau+feu osamodas`
 """
     
     elif command.group('arg1')=='': #/calcul 
