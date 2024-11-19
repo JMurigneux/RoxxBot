@@ -1,5 +1,6 @@
 from typing import Final
 import os
+import signal
 from dotenv import load_dotenv
 from discord import Intents, Interaction
 from discord.ext import commands
@@ -24,6 +25,41 @@ async def on_ready() -> None:
         print("Slash commands have been synced successfully!")
     except Exception as e:
         print(f"Failed to sync commands: {e}")
+
+    channel = bot.get_channel(1308510294506606623)
+    if channel is not None:
+        try:
+            await channel.send("Hello World!")
+            print("Activation message sent successfully.")
+        except Exception as e:
+            print(f"Failed to send activation message: {e}")
+
+@bot.event
+async def on_disconnect():
+    print("My battery is low and it's getting dark.")
+
+## STEP 2.1 : HANDLING THE SHUTDOWN
+async def shutdown_handler():
+    """Sends a message to the target channel before shutting down."""
+    channel = bot.get_channel(1308510294506606623)
+    if channel is not None:
+        try:
+            await channel.send("My battery is low and it's getting dark.")
+            print("Shutdown message sent successfully.")
+        except Exception as e:
+            print(f"Failed to send shutdown message: {e}")
+
+def handle_exit(signum, frame):
+    """Capture termination signals and shut down gracefully."""
+    print("Shutting down bot...")
+    loop = bot.loop
+    if loop.is_running():
+        loop.create_task(shutdown_handler())
+    loop.stop()
+
+# Register signals (e.g., SIGINT for Ctrl+C)
+signal.signal(signal.SIGINT, handle_exit)
+signal.signal(signal.SIGTERM, handle_exit)
 
 # STEP 3: SLASH COMMAND IMPLEMENTATION
 

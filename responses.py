@@ -272,7 +272,7 @@ Tu n'as pas fournis d'élément, la requête doit avoir le format : `{prefixe}st
         else: #mutli element
             if elt in STUFFS.keys():
                 resp= f"""
-Pour l'élément {elt} je te recommande :\n"""
+Pour les éléments {elt} je te recommande :\n"""
                 for mode in STUFFS[elt].keys():
                     if len(STUFFS[elt][mode])>0:
                         resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
