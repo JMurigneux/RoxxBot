@@ -63,7 +63,7 @@ STUFFS["air+eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/2OhT>"], '
 STUFFS["air+eau+feu"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/2OhM>"], 'no_cc': ["<https://d-bk.net/fr/t/BQYM>"]}
 STUFFS["air+feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/4qgX>"], 'no_cc': ["<https://d-bk.net/fr/t/AP7x>"]}
 STUFFS["eau+feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/47TD>"], 'no_cc': []}
-STUFFS["air+dopou+eau"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/A9Iy>"], 'cc': [], 'no_cc': []}
+STUFFS["air+dopou+eau"]={'12/6': ["<https://d-bk.net/fr/t/5kTX>"], '11/6': ["<https://d-bk.net/fr/t/A9Iy>"], 'cc': [], 'no_cc': []}
 # STUFFS["air+dopou+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
 # STUFFS["dopou+feu+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
 # STUFFS["air+dopou+feu"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
@@ -78,6 +78,8 @@ STUFFS["osamodas"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
 STUFFS["sadida"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
                     ,'eau+feu':{'cher' : ["<https://d-bk.net/fr/t/9UXA>"],'plus abordable' : ["<https://d-bk.net/fr/t/AQSn>"]}
                     ,'terre' :{'11/6' :["<https://d-bk.net/fr/t/BQpf>"]}                
+                    }
+STUFFS["iop"]={'air+dopou' :{'12/6' :["<https://d-bk.net/fr/t/5kTX>"]}              
                     }
 
 
@@ -249,7 +251,7 @@ N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
             elif elt=="dopou":
                 resp= f"""
 Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédominants il y a toujours un élément avec, mes recommandations sont donc les suivantes : 
-- eau air dopou : {STUFFS["air+dopou+eau"]["11/6"][0]}
+- eau air dopou : 11/6 {STUFFS["air+dopou+eau"]["11/6"][0]} ou 12/6 {STUFFS["air+dopou+eau"]["12/6"][0]}
 - eau dopou : {STUFFS["dopou+eau"]["11/6"][0]}
 - air dopou : {STUFFS["air+dopou"]["11/6"][0]}
 - terre eau dopou : {STUFFS["dopou+eau+terre"]["11/6"][0]} (fonctionne pour terre dopou)
