@@ -44,19 +44,19 @@ CLASSES=['xelor', 'enutrof', 'eniripsa', 'osamodas', 'zobal', 'sadida',
 #dans elements et classes je rajoute vide et faux pour prendre en compte les cas où on ne remplis pas l'argument de l'un des deux, ça peut être normal
 
 STUFFS=dict()
-STUFFS["terre"]={'12/6': ["<https://d-bk.net/fr/t/8vYb>"], '11/6': ["<https://d-bk.net/fr/t/9WxC>"], 'cc': [], 'no_cc': []}
-STUFFS["feu"]={'12/6': ["<https://d-bk.net/fr/t/A8Zv>"], '11/6': ["<https://d-bk.net/fr/t/8yAu>"], 'cc': [], 'no_cc': []}
-STUFFS["eau"]={'12/6': ["<https://d-bk.net/fr/t/B7er>"], '11/6': ["<https://d-bk.net/fr/t/B9MR>"], 'cc': [], 'no_cc': []}
-STUFFS["air"]={'12/6': ["<https://d-bk.net/fr/t/5qJF>"], '11/6': ["<https://d-bk.net/fr/t/9RJp>"], 'cc': [], 'no_cc': []}
+STUFFS["terre"]={'kolo lunaire roxx': ["<https://d-bk.net/fr/t/8vYb>"],'kolo lunaire res': ["<https://d-bk.net/fr/t/ArAs>"],'kolo lunaire goule': ["<https://d-bk.net/fr/t/ANaF>"],'kolo chasseur ré fixes': ["<https://d-bk.net/fr/t/B0wS>"], 'scaramouchapeau': ["<https://d-bk.net/fr/t/9WxC>"],'plistik wulan': ["<https://d-bk.net/fr/t/BpSq>"], 'cc': [], 'no_cc': []}
+STUFFS["feu"]={'bandit lumi': ["<https://d-bk.net/fr/t/A8Zv>"], 'funespadon': ["<https://d-bk.net/fr/t/8yAu>"], 'bandit firefoux': ["<https://d-bk.net/fr/t/7yVX>"], 'no_cc': []}
+STUFFS["eau"]={'sanctuaire cryo': ["<https://d-bk.net/fr/t/B7er>"], 'sanctuaire wulan': ["<https://d-bk.net/fr/t/B9MR>"], 'cc': [], 'no_cc': []}
+STUFFS["air"]={'no pano, dina usicke': ["<https://d-bk.net/fr/t/9pdy>"], 'no pano, klime sacrif': ["<https://d-bk.net/fr/t/9RJp>"],'ava padgref': ["<https://d-bk.net/fr/t/5qJF>"],'ava allister': ["<https://d-bk.net/fr/t/2EdT>"], 'cc': [], 'no_cc': []}
 # STUFFS["dopou"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []} ### Dopou is always with another element
 STUFFS["feu+terre"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/7ESW>"], 'no_cc': ["<https://d-bk.net/fr/t/AwSG>"]}
-STUFFS["eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/Azb9>"], 'cc': [], 'no_cc': []}
+STUFFS["eau+terre"]={'12/6': [],'11/6': [], 'Noctu wulan': ["<https://d-bk.net/fr/t/Azb9>"], 'cc': [], 'no_cc': []}
 # STUFFS["air+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
 # STUFFS["dopou+terre"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
-STUFFS["eau+feu"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/931X>"], 'cc': [], 'no_cc': []}
-STUFFS["air+feu"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/7OhS>"], 'no_cc': []}
+STUFFS["eau+feu"]={'12/6': [], '11/6': [], 'Mazin pnose': ["<https://d-bk.net/fr/t/931X>"], 'cc': [], 'no_cc': []}
+STUFFS["air+feu"]={'12/6': [], '11/6': [],'cc': [], 'Padgref strigide': ["<https://d-bk.net/fr/t/7OhS>"], 'no_cc': []}
 # STUFFS["dopou+feu"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
-STUFFS["air+eau"]={'12/6': ["<https://d-bk.net/fr/t/8Ql4>"], '11/6': ["<https://d-bk.net/fr/t/BMXD>"], 'cc': [], 'no_cc': []}
+STUFFS["air+eau"]={'12/6': ["<https://d-bk.net/fr/t/8Ql4>"], '11/6': ["<https://d-bk.net/fr/t/BMXD>"], 'cc': ["<https://d-bk.net/fr/t/Br83>"], 'no_cc': []}
 STUFFS["dopou+eau"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/AzPu>"], 'cc': [], 'no_cc': []}
 STUFFS["air+dopou"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BK5m>"], 'cc': [], 'no_cc': []}
 STUFFS["air+eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/2OhT>"], 'cc': [], 'no_cc': []}
@@ -77,11 +77,11 @@ STUFFS["osamodas"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
                     }
 STUFFS["sadida"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
                     ,'eau+feu':{'cher' : ["<https://d-bk.net/fr/t/9UXA>"],'plus abordable' : ["<https://d-bk.net/fr/t/AQSn>"]}
-                    ,'terre' :{'11/6' :["<https://d-bk.net/fr/t/BQpf>"]}                
+                    ,'terre' :{'11/6' :["<https://d-bk.net/fr/t/BQpf>"]}
+                    ,'eau+terre' :{'11/6' :["<https://d-bk.net/fr/t/BoWN>"]}                
                     }
-STUFFS["iop"]={'air+dopou' :{'12/6' :["<https://d-bk.net/fr/t/5kTX>"]}              
+STUFFS["iop"]={'dopou' :{'12/6' :["<https://d-bk.net/fr/t/5kTX>"]}              
                     }
-
 
 
 #####################
@@ -193,8 +193,6 @@ Il y a deux commandes :
 # - calcul : pour la formulation des calculs de dommage d'invocations ou dopou
     return resp
         
-
-
 def stuff_response(element,classe,plateforme="discord"):
 
     elt=lecture_elt(element)
@@ -233,23 +231,8 @@ Exemple de requete valide : `{prefixe}stuff eau+feu osamodas`.
         return resp
     
     if classe=='vide': # pas de classe spécifiée
-        if not '+' in elt: #mono élément
-            if elt in ["terre","feu","eau"]:
-                resp= f"""
-Pour l'élément {elt} je te recommande : 
-- 12/6 : {STUFFS[elt]["12/6"][0]}
-- 11/6 : {STUFFS[elt]["11/6"][0]} 
-N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
-                return resp
-            elif elt=="air":
-                resp= f"""
-Pour l'élément {elt} je te recommande : 
-- 11/6 : {STUFFS[elt]["11/6"][0]} (vraiment le mieux)
-- 12/6 : {STUFFS[elt]["12/6"][0]}
-N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
-                return resp
-            elif elt=="dopou":
-                resp= f"""
+        if elt=="dopou":
+            resp= f"""
 Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédominants il y a toujours un élément avec, mes recommandations sont donc les suivantes : 
 - eau air dopou : 11/6 {STUFFS["air+dopou+eau"]["11/6"][0]} ou 12/6 {STUFFS["air+dopou+eau"]["12/6"][0]}
 - eau dopou : {STUFFS["dopou+eau"]["11/6"][0]}
@@ -257,22 +240,11 @@ Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédomina
 - terre eau dopou : {STUFFS["dopou+eau+terre"]["11/6"][0]} (fonctionne pour terre dopou)
 - feu eau dopou : {STUFFS["dopou+eau+feu"]["11/6"][0]} (fonctionne pour feu dopou)
 N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
-                return resp
-            elif elt=='multi':
-                resp= f"""
-Pour jouer {elt} je te recommande :
-- docri : {STUFFS[elt]["cc"][0]}
-N'hésite pas à tag Warp pour plus de détails sur ce stuff."""
-                return resp
-            else : #élément non reconnu
-                resp=f"""
-Tu n'as pas fournis d'élément, la requête doit avoir le format : `{prefixe}stuff élément classe`."""
-                return resp
-        
-        else: #mutli element
+            return resp        
+        else:
             if elt in STUFFS.keys():
                 resp= f"""
-Pour les éléments {elt} je te recommande :\n"""
+Pour un stuff {elt} je recommande :\n"""
                 for mode in STUFFS[elt].keys():
                     if len(STUFFS[elt][mode])>0:
                         resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
@@ -283,7 +255,6 @@ Pour les éléments {elt} je te recommande :\n"""
                 resp=f"""
 Je n'ai pas de stuff dans ma bibliothèque qui corresponde au combo {elt}, tu peux tag Warp pour savoir pourquoi et peut-être qu'il aura quelque chose à te proposer."""
                 return resp
-
                 
     else: #avec une classe précisée
         resp='pas trouvé'
