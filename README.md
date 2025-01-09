@@ -1,2 +1,2 @@
 # RoxxBot
-A discord bot created to offer builds recommandations for the game Dofus Touch.
+A Discord bot created to offer build recommendations for the game Dofus Touch.
