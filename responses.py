@@ -69,7 +69,7 @@ STUFFS["air+dopou+eau"]={'12/6': ["<https://d-bk.net/fr/t/5kTX>"], '11/6': ["<ht
 # STUFFS["air+dopou+feu"]={'12/6': [], '11/6': [], 'cc': [], 'no_cc': []}
 STUFFS["dopou+eau+feu"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BQQd>"], 'cc': [], 'no_cc': []}
 STUFFS["dopou+eau+terre"]={'12/6': [], '11/6': ["<https://d-bk.net/fr/t/BQQl>"], 'cc': [], 'no_cc': []}
-STUFFS["multi"]={'12/6': [], '11/6': [], 'cc': ["<https://d-bk.net/fr/t/2Ol7>"], 'no_cc': []}
+STUFFS["multi"]={'12/6': [], '11/6': [], 'strigide glours': ["<https://d-bk.net/fr/t/2Ol7>"], 'virale glours wukin': ["<https://d-bk.net/fr/t/Bv6e>"]}
 STUFFS["osamodas"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
                     ,'eau+feu':{'cher' : ["<https://d-bk.net/fr/t/9UXA>"],'plus abordable' : ["<https://d-bk.net/fr/t/AQSn>"]}
                     ,'air' :{'11/6' :["<https://d-bk.net/fr/t/9Y06>"]}
