@@ -253,7 +253,7 @@ Pour un stuff {elt.replace("+","/")} je recommande :\n"""
 
             else: #élément non présent dans la biblio
                 resp=f"""
-Je n'ai pas de stuff dans ma bibliothèque qui corresponde au combo {elt..replace("+","/")}, tu peux tag Warp pour savoir pourquoi et peut-être qu'il aura quelque chose à te proposer."""
+Je n'ai pas de stuff dans ma bibliothèque qui corresponde au combo {elt.replace("+","/")}, tu peux tag Warp pour savoir pourquoi et peut-être qu'il aura quelque chose à te proposer."""
                 return resp
                 
     else: #avec une classe précisée
@@ -261,7 +261,7 @@ Je n'ai pas de stuff dans ma bibliothèque qui corresponde au combo {elt..replac
         if classe in STUFFS.keys():
             if elt in STUFFS[classe].keys():
                 resp=f"""
-Pour l'élément {elt..replace("+","/")} de la classe {classe} je te recommande :\n"""
+Pour l'élément {elt.replace("+","/")} de la classe {classe} je te recommande :\n"""
                 for mode in STUFFS[classe][elt].keys():
                     if len(STUFFS[classe][elt][mode])>0:
                         resp+=f"- {mode} : {STUFFS[classe][elt][mode][0]}\n"
@@ -269,7 +269,7 @@ Pour l'élément {elt..replace("+","/")} de la classe {classe} je te recommande 
                 
         if resp=='pas trouvé':
             resp=f"""
-Je n'ai pas de stuff {elt..replace("+","/")} spécifiques pour la classe {classe}, tu trouveras probablement ton bonheur dans les stuffs classiques de l'élément:\n"""
+Je n'ai pas de stuff {elt.replace("+","/")} spécifiques pour la classe {classe}, tu trouveras probablement ton bonheur dans les stuffs classiques de l'élément:\n"""
             for mode in STUFFS[elt].keys():
                 if len(STUFFS[elt][mode])>0:
                     resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
