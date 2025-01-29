@@ -30,7 +30,19 @@ async def on_ready() -> None:
     if channel is not None:
         try:
             await channel.send("Hello World!")
+            # liste des serveurs dans lesquels le bot est présent
+            for guild in bot.guilds:
+                print(f"Server: {guild.name} | Members count: {guild.member_count}")
+                # print(guild.icon)
+                # print(guild.owner)
+                # print(guild.banner)
+                # print(guild.members)
+                # print(guild.preferred_locale)
+                # for member in guild.members:
+                #     print(member) # prints all members names one by one
+                print('_________')
             print("Activation message sent successfully.")
+            
         except Exception as e:
             print(f"Failed to send activation message: {e}")
 
@@ -91,6 +103,7 @@ Après normalement c'est la fusion !
 # STEP 4: MAIN ENTRY POINT
 def main() -> None:
     bot.run(TOKEN)
+
 
 if __name__ == '__main__':
     main()
