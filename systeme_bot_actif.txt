@@ -30,15 +30,22 @@ Créer un fichier de service pour le bot :
 
 Ajouter la configuration suivante, en remplaçant /chemin/vers/main.py par le chemin vers votre fichier Python :
 
+  GNU nano 7.2                                    /etc/systemd/system/roxxbot_session.service *
 [Unit]
 Description=RoxxBot session
 After=network.target
+DefaultDependencies=no
+Before=shutdown.target reboot.target halt.target
 
 [Service]
 ExecStart=/usr/bin/python3 /home/warp/Documents/RoxxBot/main.py
 WorkingDirectory=/home/warp/Documents/RoxxBot
 Restart=always
 User=warp
+# Ajouts pour une meilleure gestion de l'arrêt
+TimeoutStopSec=5
+KillSignal=SIGTERM
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target

@@ -2,9 +2,13 @@ from typing import Final
 import os
 import signal
 from dotenv import load_dotenv
-from discord import Intents, Interaction
+# import discord
+from discord import Intents, Interaction, InteractionType
 from discord.ext import commands
 from responses import help_response,stuff_response
+import signal
+import asyncio
+import sys
 
 # STEP 0: LOAD OUR TOKEN FROM SOMEWHERE SAFE
 load_dotenv()
@@ -46,33 +50,119 @@ async def on_ready() -> None:
         except Exception as e:
             print(f"Failed to send activation message: {e}")
 
+# Commands logging
 @bot.event
-async def on_disconnect():
-    print("My battery is low and it's getting dark.")
+async def on_interaction(interaction):
+        # Vérifie si l'interaction est une commande
+    if interaction.type == InteractionType.application_command:
+        channel = bot.get_channel(1335368709157421056)
+        server = interaction.guild.name
+        user = interaction.user
+        command = interaction.command.name
+        cmd_channel = interaction.channel
+        
+        # Récupération des arguments
+        options = []
+        if interaction.data.get('options'):
+            for option in interaction.data['options']:
+                option_name = option['name']
+                option_value = option['value']
+                options.append(f"{option_name}: {option_value}")
+        
+        # Création du message avec les arguments si présents
+        if options:
+            args_str = ' | '.join(options)
+            log_message = f'{user} used /{command} with args: {args_str} in server {server} channel {cmd_channel}'
+        else:
+            log_message = f'{user} used /{command} in server {server} channel {cmd_channel}'
+        
+        # print(log_message)
+        await channel.send(log_message)
 
-## STEP 2.1 : HANDLING THE SHUTDOWN
+############################################################################################
+# @bot.event
+# async def on_disconnect():
+#     print("My battery is low and it's getting dark.")
+
+# ## STEP 2.1 : HANDLING THE SHUTDOWN
+# async def shutdown_handler():
+#     """Sends a message to the target channel before shutting down."""
+#     channel = bot.get_channel(1308510294506606623)
+#     if channel is not None:
+#         try:
+#             await channel.send("My battery is low and it's getting dark.")
+#             print("Shutdown message sent successfully.")
+#         except Exception as e:
+#             print(f"Failed to send shutdown message: {e}")
+
+# def handle_exit(signum, frame):
+#     """Capture termination signals and shut down gracefully."""
+#     print("Shutting down bot...")
+#     loop = bot.loop
+#     if loop.is_running():
+#         loop.create_task(shutdown_handler())
+#     loop.stop()
+
+# # Register signals (e.g., SIGINT for Ctrl+C)
+# signal.signal(signal.SIGINT, handle_exit)
+# signal.signal(signal.SIGTERM, handle_exit)
+############################################################################################
+# Flag global pour suivre si le message a été envoyé
+shutdown_message_sent = False
+
+class GracefulExit(SystemExit):
+    pass
+
 async def shutdown_handler():
     """Sends a message to the target channel before shutting down."""
-    channel = bot.get_channel(1308510294506606623)
-    if channel is not None:
-        try:
-            await channel.send("My battery is low and it's getting dark.")
-            print("Shutdown message sent successfully.")
-        except Exception as e:
-            print(f"Failed to send shutdown message: {e}")
+    global shutdown_message_sent
+    print("Initiating shutdown sequence...")
+    
+    if not shutdown_message_sent:
+        channel = bot.get_channel(1308510294506606623)
+        if channel is not None:
+            try:
+                await channel.send("My battery is low and it's getting dark.")
+                shutdown_message_sent = True
+                print("Shutdown message sent successfully.")
+            except Exception as e:
+                print(f"Failed to send shutdown message: {e}")
+    
+    try:
+        await bot.close()
+        print("Bot connection closed successfully.")
+    except Exception as e:
+        print(f"Error during bot shutdown: {e}")
+    
+    raise GracefulExit()
 
-def handle_exit(signum, frame):
-    """Capture termination signals and shut down gracefully."""
-    print("Shutting down bot...")
-    loop = bot.loop
-    if loop.is_running():
-        loop.create_task(shutdown_handler())
-    loop.stop()
+def signal_handler(signum, frame):
+    """Handle termination signals."""
+    print(f"Received signal {signum}")
+    if asyncio.get_event_loop().is_running():
+        asyncio.create_task(shutdown_handler())
+    else:
+        sys.exit(0)
 
-# Register signals (e.g., SIGINT for Ctrl+C)
-signal.signal(signal.SIGINT, handle_exit)
-signal.signal(signal.SIGTERM, handle_exit)
+# Register signal handlers
+signal.signal(signal.SIGTERM, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
+@bot.event
+async def on_disconnect():
+    global shutdown_message_sent
+    print("Bot disconnected from Discord.")
+    
+    if not shutdown_message_sent:
+        channel = bot.get_channel(1308510294506606623)
+        if channel is not None and bot.is_ready():
+            try:
+                await channel.send("My battery is low and it's getting dark.")
+                shutdown_message_sent = True
+                print("Disconnection message sent successfully.")
+            except Exception as e:
+                print(f"Failed to send disconnection message: {e}")
+############################################################################################
 # STEP 3: SLASH COMMAND IMPLEMENTATION
 
 # Stuff command
