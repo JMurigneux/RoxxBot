@@ -3,9 +3,9 @@ import os
 import signal
 from dotenv import load_dotenv
 # import discord
-from discord import Intents, Interaction, InteractionType
+from discord import Intents, Interaction, InteractionType, Embed
 from discord.ext import commands
-from responses import help_response,stuff_response
+from responses import help_response,stuff_response,color_mix,IMAGES_LINK,image_response
 import signal
 import asyncio
 import sys
@@ -54,7 +54,7 @@ async def on_ready() -> None:
 @bot.event
 async def on_interaction(interaction):
         # Vérifie si l'interaction est une commande
-    if interaction.type == InteractionType.application_command:
+    if interaction.type == InteractionType.application_command and not interaction.response.is_done():
         channel = bot.get_channel(1335368709157421056)
         server = interaction.guild.name
         user = interaction.user
@@ -168,26 +168,57 @@ async def on_disconnect():
 # Stuff command
 @bot.tree.command(name="stuff", description="Répond avec mes recommandations de stuff.")
 async def stuff(interaction: Interaction, element: str, classe: str="vide"):
-    resp=stuff_response(element.strip().lower(),classe.strip().lower())
-    await interaction.response.send_message(resp)
+    resp,error=stuff_response(element.strip().lower(),classe.strip().lower())
+    image=image_response(element.strip().lower())
+    couleur=color_mix(element.strip().lower())
+    if classe=="vide":
+        embed = Embed(
+            title=f"Stuffs {element}",#element
+            color=couleur  # Couleur élément
+        )
+    else :
+        embed = Embed(
+            title=f"Stuffs {element}",#element
+            description=classe,#classe
+            color=couleur  # Couleur élément
+        )
+
+    embed.set_thumbnail(url=image)  # URL d'une image pour l'illustration
+    
+    embed.add_field(name="Liens dofusbook :", value=(resp), inline=False)
+    embed.set_footer(text="Si tu as une question n'hésite pas à tag Warp.")
+    await interaction.response.send_message(embed=embed)
 
 # wbhelp command
 @bot.tree.command(name="wbhelp", description="Besoin d'aide sur l'utilisation du bot?")
 async def wbhelp(interaction: Interaction, commande: str ='vide'):
     resp=help_response(commande.strip().lower())
-    await interaction.response.send_message(resp)
+    embed = Embed(
+        title=f"Aide",
+        color=0xff0000  
+    )
+
+    embed.set_thumbnail(url=IMAGES_LINK["error"])  # URL d'une image pour l'illustration
+    embed.add_field(name="Comment utiliser WarpBot?", value=(resp), inline=False)
+    await interaction.response.send_message(embed=embed)
 
 # twitch command
 @bot.tree.command(name="twitch", description="Pour avoir des infos sur les prochains streams de Warp.")
 async def twitch(interaction: Interaction):
-    resp= f"""
+    embed = Embed(
+        title=f"Twitch",
+        color=0x6441a5  # Couleur twitch
+    )
+
+    embed.set_thumbnail(url=IMAGES_LINK["twitch"])  # URL d'une image pour l'illustration
+    embed.add_field(name="Lien de la chaîne :",value=("https://www.twitch.tv/warp_is_fine"), inline=True)
+    embed.add_field(name="Planning :", value=(f"""
 Je stream la majorité des tournois pvp sur dofus touch, sauf quand je participe bien sur !
 Au programme :
-- 20-24 janvier : Tournois clandestin Oshimo
-- 24-26 janvier : Tournois clandestin Herdegrize (je participe)
-Après normalement c'est la fusion !
-"""
-    await interaction.response.send_message(resp)
+- du 10 février au 23 février : Tournois clandestin Herdegrize
+"""), inline=False)
+    embed.set_footer(text="N'hésite pas à follow pour être au courant quand je lance un stream.")
+    await interaction.response.send_message(embed=embed)
 
 
 # STEP 4: MAIN ENTRY POINT

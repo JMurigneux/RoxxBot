@@ -31,6 +31,13 @@ bi elem écris de la maniere suivante "terre+feu" mais rangés par ordre alphab�
 #####################
 # VARIABLES
 #####################
+COLORS=dict()
+COLORS["terre"]="815633"
+COLORS["feu"]="d13800"
+COLORS["eau"]="398a89"
+COLORS["air"]="2b6f2d"
+COLORS["dopou"]="6f5794"
+COLORS["multi"]="f3cf0b"
 
 ELEMENTS=['terre', 'feu', 'eau', 'air', 'dopou', 'feu+terre', 'eau+terre', 
           'air+terre', 'dopou+terre', 'eau+feu', 'air+feu', 'dopou+feu', 
@@ -83,7 +90,35 @@ STUFFS["sadida"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
 STUFFS["iop"]={'dopou' :{'12/6' :["<https://d-bk.net/fr/t/5kTX>"]}              
                     }
 
-
+IMAGES_LINK=dict()
+IMAGES_LINK["twitch"]="https://drive.google.com/uc?id="+"1B7dARplU3Y-0zS77S_JTSqh1gu-tvyIa"#https://drive.google.com/file/d/1B7dARplU3Y-0zS77S_JTSqh1gu-tvyIa/view?usp=sharing
+IMAGES_LINK["terre"]="https://drive.google.com/uc?id="+"13rMcJr5wNLaWEOZp7CXrnZkrmh4zvvWr"#"https://drive.google.com/file/d/13rMcJr5wNLaWEOZp7CXrnZkrmh4zvvWr/view?usp=sharing"
+IMAGES_LINK["air"]=  "https://drive.google.com/uc?id="+"19PCVHr_1b_bvvgigREB5enX9NNxx4B4-"#"https://drive.google.com/file/d/19PCVHr_1b_bvvgigREB5enX9NNxx4B4-/view?usp=sharing"
+IMAGES_LINK["feu"]=  "https://drive.google.com/uc?id="+"1NU5qJ7ETGKPlk2P01L5SXz67z-kZ63RE"#"https://drive.google.com/file/d/1NU5qJ7ETGKPlk2P01L5SXz67z-kZ63RE/view?usp=sharing"
+IMAGES_LINK["eau"]=  "https://drive.google.com/uc?id="+"1GorSPzE-Rl7HftV9fj-7kugQQ1ms-WHl"#"https://drive.google.com/file/d/1GorSPzE-Rl7HftV9fj-7kugQQ1ms-WHl/view?usp=sharing"
+IMAGES_LINK["dopou"]="https://drive.google.com/uc?id="+"1C0IGM3qztADKcWhx-ElleWSNg0x0-C_D"#"https://drive.google.com/file/d/1C0IGM3qztADKcWhx-ElleWSNg0x0-C_D/view?usp=sharing"
+IMAGES_LINK["error"]="https://drive.google.com/uc?id="+"1IXajCU8Qe9Qu2KEmtQf9GZpJZQ0Q1mQc"#"https://drive.google.com/file/d/1IXajCU8Qe9Qu2KEmtQf9GZpJZQ0Q1mQc/view?usp=sharing"
+IMAGES_LINK["feu+terre"]=       "https://drive.google.com/uc?id="+"1WBkEeUFqyHl6-TTnN7Hx308sApnrLx4b"#https://drive.google.com/file/d/1WBkEeUFqyHl6-TTnN7Hx308sApnrLx4b/view?usp=sharing
+IMAGES_LINK["eau+terre"]=       "https://drive.google.com/uc?id="+"1tpP06if5Jn0Znf9NGx836JonSmuHu5mw"#https://drive.google.com/file/d/1tpP06if5Jn0Znf9NGx836JonSmuHu5mw/view?usp=sharing
+IMAGES_LINK["air+terre"]=       "https://drive.google.com/uc?id="+"1GG3Ko9wbAUJ5GAJlL3ZQR33GbznM0Mwa"#https://drive.google.com/file/d/1GG3Ko9wbAUJ5GAJlL3ZQR33GbznM0Mwa/view?usp=sharing
+IMAGES_LINK["dopou+terre"]=     "https://drive.google.com/uc?id="+"1MX34nKtjRl7OseIBGiRxPWdjy1n1Mbl3"#https://drive.google.com/file/d/1MX34nKtjRl7OseIBGiRxPWdjy1n1Mbl3/view?usp=sharing
+IMAGES_LINK["eau+feu"]=         "https://drive.google.com/uc?id="+"1xfGRTrPA1O-mXzH_p8AFBkbFTc3Rb13x"#https://drive.google.com/file/d/1xfGRTrPA1O-mXzH_p8AFBkbFTc3Rb13x/view?usp=sharing
+IMAGES_LINK["air+feu"]=         "https://drive.google.com/uc?id="+"1gL0Vk-HnVV_ExTmbsI-k27VpJ7pH6KRL"#https://drive.google.com/file/d/1gL0Vk-HnVV_ExTmbsI-k27VpJ7pH6KRL/view?usp=sharing
+IMAGES_LINK["dopou+feu"]=       "https://drive.google.com/uc?id="+"15ZsxUaFVTW7vGv9CumwaeNQypIzCmcIr"#https://drive.google.com/file/d/15ZsxUaFVTW7vGv9CumwaeNQypIzCmcIr/view?usp=sharing
+IMAGES_LINK["air+eau"]=         "https://drive.google.com/uc?id="+"1huDHiTktKhKSYH9HwYnYg1rRPEdwK36n"#https://drive.google.com/file/d/1huDHiTktKhKSYH9HwYnYg1rRPEdwK36n/view?usp=sharing
+IMAGES_LINK["dopou+eau"]=       "https://drive.google.com/uc?id="+"1KeEYZZTqsBqnaqa5SbeDQbhjLUie8WoE"#https://drive.google.com/file/d/1KeEYZZTqsBqnaqa5SbeDQbhjLUie8WoE/view?usp=sharing
+IMAGES_LINK["air+dopou"]=       "https://drive.google.com/uc?id="+"1BVN5Xgg0DqagzLTcBmLacWMcjOBBhtWX"#https://drive.google.com/file/d/1BVN5Xgg0DqagzLTcBmLacWMcjOBBhtWX/view?usp=sharing
+IMAGES_LINK["air+eau+terre"]=   "https://drive.google.com/uc?id="+"1TYzkmD7Zqexg3K_9tyw3eBYBs3FniM9z"#https://drive.google.com/file/d/1TYzkmD7Zqexg3K_9tyw3eBYBs3FniM9z/view?usp=sharing
+IMAGES_LINK["air+eau+feu"]=     "https://drive.google.com/uc?id="+"1szOZy3IYBjugqLr1CXk6NpW4KnfZF59g"#https://drive.google.com/file/d/1szOZy3IYBjugqLr1CXk6NpW4KnfZF59g/view?usp=sharing
+IMAGES_LINK["air+feu+terre"]=   "https://drive.google.com/uc?id="+"1gMC4SN41sT1g2rTbJHftpqTzuPrS6Jbi"#https://drive.google.com/file/d/1gMC4SN41sT1g2rTbJHftpqTzuPrS6Jbi/view?usp=sharing
+IMAGES_LINK["eau+feu+terre"]=   "https://drive.google.com/uc?id="+"1-V9BPis1MR6dT2Zp6yhbD_k1ZW4kOPLQ"#https://drive.google.com/file/d/1-V9BPis1MR6dT2Zp6yhbD_k1ZW4kOPLQ/view?usp=sharing
+IMAGES_LINK["air+dopou+eau"]=   "https://drive.google.com/uc?id="+"1jn97glLnA6iR3Wu-D51pvwPtribMmT_p"#https://drive.google.com/file/d/1jn97glLnA6iR3Wu-D51pvwPtribMmT_p/view?usp=sharing
+IMAGES_LINK["air+dopou+terre"]= "https://drive.google.com/uc?id="+"15lvhyr2LE4rRVq114tgB241v1q4ebZGA"#https://drive.google.com/file/d/15lvhyr2LE4rRVq114tgB241v1q4ebZGA/view?usp=sharing
+IMAGES_LINK["dopou+feu+terre"]= "https://drive.google.com/uc?id="+"1VFuero8gQbfTIZ_0hEBb_9LWNYLeKjfz"#https://drive.google.com/file/d/1VFuero8gQbfTIZ_0hEBb_9LWNYLeKjfz/view?usp=sharing
+IMAGES_LINK["air+dopou+feu"]=   "https://drive.google.com/uc?id="+"1H0KF6bFlOxMDPAlb0PxEc6tyTWTuYb9S"#https://drive.google.com/file/d/1H0KF6bFlOxMDPAlb0PxEc6tyTWTuYb9S/view?usp=sharing
+IMAGES_LINK["dopou+eau+feu"]=   "https://drive.google.com/uc?id="+"1EfMJiv-ltOpKcR1mZ0b1b_tpCtCQO74u"#https://drive.google.com/file/d/1EfMJiv-ltOpKcR1mZ0b1b_tpCtCQO74u/view?usp=sharing
+IMAGES_LINK["dopou+eau+terre"]= "https://drive.google.com/uc?id="+"1pDqCVYu4HXpfcxlLXslC2EpKeuH3epCO"#https://drive.google.com/file/d/1pDqCVYu4HXpfcxlLXslC2EpKeuH3epCO/view?usp=sharing
+IMAGES_LINK["multi"]=           "https://drive.google.com/uc?id="+"1sFla0c4Ze-AkuTM_ubTYjLzviTyu-c2f"#https://drive.google.com/file/d/1sFla0c4Ze-AkuTM_ubTYjLzviTyu-c2f/view?usp=sharing
 #####################
 # MAIN RESPONSE
 #####################
@@ -183,8 +218,6 @@ Ce qui nous fait une requete de la forme : `{prefixe}stuff eau+feu osamodas`
 """
     else: #/wbhelp
         resp= f"""
-Comment utiliser WarpBot? 
-
 Il y a deux commandes :
 - Stuff  : pour recevoir des recommandations de stuff. `{prefixe}wbhelp stuff` pour plus de détails.
 - Twitch : pour avoir des infos sur les prochains stream de warp. Pas d'argument à rajouter, `{prefixe}twitch` vous renverra les informations nécessaires.
@@ -196,7 +229,7 @@ Il y a deux commandes :
 def stuff_response(element,classe,plateforme="discord"):
 
     elt=lecture_elt(element)
-
+    error=4 #0=ok, 1=element inconnu, 2= classe inconnue, 3=element&classe inconnue,4=erreurs autres
     if plateforme=="discord":
         prefixe='/'
     elif plateforme=="twitch":
@@ -210,53 +243,59 @@ def stuff_response(element,classe,plateforme="discord"):
         resp=f"""
 Je ne reconnais pas les arguments **{elt}** et **{classe}** fournis.
 Pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `{prefixe}wbhelp stuff`.
-Elements valides: terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+'.
+Elements valides: terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+', d'un '/' ou d'un espace.
 Pour les classes il faut écrire le nom en entier.
 Exemple de requete valide : `{prefixe}stuff eau+feu osamodas`.
-"""
-        return resp
+"""     
+        error=3
+        return resp,error
     elif not elt in ELEMENTS: #élément non reconnu
         resp=f"""
 Je ne reconnais pas l'élément **{elt}** désolé, pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `{prefixe}wbhelp stuff`.
 Elements valides: terre/feu/eau/air/dopou/multi ou toute combinaison d'éléments différents (excepté multi) séparés d'un '+'.
 Exemple de requete valide : `{prefixe}stuff air+eau`.
-"""
-        return resp
+"""     
+        error=1
+        return resp,error
     elif not classe in CLASSES: #classe non reconnue
         resp=f"""
 Je ne reconnais pas la classe **{classe}** désolé, pour recevoir de l'aide sur l'utilisation de la fonction stuff, taper `{prefixe}wbhelp stuff`.
 Il faut écrire le nom de classe en entier.
 Exemple de requete valide : `{prefixe}stuff eau+feu osamodas`.
-"""
-        return resp
+"""     
+        error=2
+        return resp,error
     
     if classe=='vide': # pas de classe spécifiée
         if elt=="dopou":
+            error=0
             resp= f"""
 Les dopou ne se jouent pas spécialement tous seuls, meme si ils sont prédominants il y a toujours un élément avec, mes recommandations sont donc les suivantes : 
 - eau air dopou : 11/6 {STUFFS["air+dopou+eau"]["11/6"][0]} ou 12/6 {STUFFS["air+dopou+eau"]["12/6"][0]}
 - eau dopou : {STUFFS["dopou+eau"]["11/6"][0]}
 - air dopou : {STUFFS["air+dopou"]["11/6"][0]}
 - terre eau dopou : {STUFFS["dopou+eau+terre"]["11/6"][0]} (fonctionne pour terre dopou)
-- feu eau dopou : {STUFFS["dopou+eau+feu"]["11/6"][0]} (fonctionne pour feu dopou)
-N'hésite pas à tag Warp pour plus de détails sur ces stuffs."""
-            return resp        
+- feu eau dopou : {STUFFS["dopou+eau+feu"]["11/6"][0]} (fonctionne pour feu dopou)"""
+            return resp,error        
         else:
             if elt in STUFFS.keys():
+                error=0
                 resp= f"""
 Pour un stuff {elt.replace("+","/")} je recommande :\n"""
                 for mode in STUFFS[elt].keys():
                     if len(STUFFS[elt][mode])>0:
                         resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
-                resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
-                return resp
+                # resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
+                return resp,error
 
             else: #élément non présent dans la biblio
+                error=0
                 resp=f"""
 Je n'ai pas de stuff dans ma bibliothèque qui corresponde au combo {elt.replace("+","/")}, tu peux tag Warp pour savoir pourquoi et peut-être qu'il aura quelque chose à te proposer."""
-                return resp
+                return resp,error
                 
     else: #avec une classe précisée
+        error=0
         resp='pas trouvé'
         if classe in STUFFS.keys():
             if elt in STUFFS[classe].keys():
@@ -265,7 +304,7 @@ Pour l'élément {elt.replace("+","/")} de la classe {classe} je te recommande :
                 for mode in STUFFS[classe][elt].keys():
                     if len(STUFFS[classe][elt][mode])>0:
                         resp+=f"- {mode} : {STUFFS[classe][elt][mode][0]}\n"
-                resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
+                # resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
                 
         if resp=='pas trouvé':
             resp=f"""
@@ -273,12 +312,33 @@ Je n'ai pas de stuff {elt.replace("+","/")} spécifiques pour la classe {classe}
             for mode in STUFFS[elt].keys():
                 if len(STUFFS[elt][mode])>0:
                     resp+=f"- {mode} : {STUFFS[elt][mode][0]}\n"
-            resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
-        return resp
-
+            # resp+="N'hésite pas à tag Warp pour plus de détails sur ces stuffs."
+        return resp,error
+    error=4
     resp="Vraisemblablement il y a une erreur dans le code : tu ne devrais pas arriver ici, tag Warp pour qu'il répare le bug stp <3"
-    return resp
+    return resp,error
 
+def color_mix(elements):
+    try:
+        colors_list=[COLORS[k]for k in lecture_elt(elements).split('+')]
+    except: #erreur dans les éléments
+        return int("000000",16)
+    tot_weight = len(colors_list)
+    red = int(sum([int(k[:2], 16) for k in colors_list])/tot_weight)
+    green = int(sum([int(k[2:4], 16) for k in colors_list])/tot_weight)
+    blue = int(sum([int(k[4:6], 16) for k in colors_list])/tot_weight)
+    zpad = lambda x: x if len(x)==2 else '0' + x
+    
+    return int(zpad(hex(red)[2:]) + zpad(hex(green)[2:]) + zpad(hex(blue)[2:]), 16)
+
+def image_response(element):
+    elt=lecture_elt(element)
+    try:
+        image=IMAGES_LINK[elt]
+    except:
+        image=IMAGES_LINK['error']
+    return image
+    
 def calcul_response(command,plateforme="discord"):
 
     if plateforme=="discord":
