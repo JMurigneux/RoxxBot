@@ -84,7 +84,7 @@ STUFFS["osamodas"]={'feu' :{'12/6' :["<https://d-bk.net/fr/t/9nwN>"]}
                     }
 STUFFS["sadida"]={'feu' :{'bandit luminescente' :["<https://d-bk.net/fr/t/9nwN>"]}
                     ,'eau+feu':{'mazin pnose' : ["<https://d-bk.net/fr/t/9UXA>"]}
-                    ,'terre' :{'11/6' :["<https://d-bk.net/fr/t/BQpf>"]}
+                    ,'terre' :{'scaramouchapeau lunaire' :["<https://d-bk.net/fr/t/BQpf>"]}
                     # ,'eau+terre' :{'11/6' :["<https://d-bk.net/fr/t/BoWN>"]}                
                     }
 STUFFS["iop"]={'dopou' :{'12/6' :["<https://d-bk.net/fr/t/5kTX>"]}              
